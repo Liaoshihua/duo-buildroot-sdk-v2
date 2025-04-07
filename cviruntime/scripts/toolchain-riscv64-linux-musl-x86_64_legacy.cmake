@@ -34,6 +34,6 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE STRING "" )
 set( CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS}" CACHE STRING "" )
 
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mcpu=c906" )
-set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=rv64gcv_zfh_xthead" )
+set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=rv64gcv_zfh" )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=c906" )
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=rv64gcv_zfh_xthead" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=rv64gcv_zfh" )

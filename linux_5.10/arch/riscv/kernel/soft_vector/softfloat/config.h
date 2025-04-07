@@ -5,7 +5,7 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* Default value for --isa switch */
-#define DEFAULT_ISA "RV64IMAFDC"
+#define DEFAULT_ISA "RV64GC"
 
 /* Default value for --priv switch */
 #define DEFAULT_PRIV "MSU"

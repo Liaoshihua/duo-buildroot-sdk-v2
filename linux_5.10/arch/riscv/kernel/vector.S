@@ -23,9 +23,13 @@
 #if (defined(CONFIG_VECTOR_1_0) && defined(__THEAD_VERSION__))
 #define V_ST	vse8.v
 #define V_LD	vle8.v
+#define V_SETVLI vsetvli
+#define V_SETVL vsetvl
 #else
-#define V_ST	vsb.v
-#define V_LD	vlb.v
+#define V_SETVL th.vsetvl
+#define V_SETVLI th.vsetvli
+#define V_ST	th.vsb.v
+#define V_LD	th.vlb.v
 #endif
 
 ENTRY(__vstate_save)
@@ -46,7 +50,7 @@ ENTRY(__vstate_save)
 	csrr	t0,  CSR_VTYPE
 	sd	t0,  TASK_THREAD_VTYPE_V0(a0)
 
-	vsetvli	t0, x0, e8,m8
+	V_SETVLI	t0, x0, e8,m8
 	V_ST	v0,  (a0)
 	addi	a0, a0, RISCV_VECTOR_VLENB*8
 	V_ST	v8,  (a0)
@@ -67,7 +71,7 @@ ENTRY(__vstate_restore)
 	li	t1, (SR_VS | SR_FS)
 	csrs	sstatus, t1
 
-	vsetvli	t0, x0, e8,m8
+	V_SETVLI	t0, x0, e8,m8
 	V_LD	v0,  (a0)
 	addi	a0, a0, RISCV_VECTOR_VLENB*8
 	V_LD	v8,  (a0)
@@ -89,10 +93,10 @@ ENTRY(__vstate_restore)
 	srli	t3, t2, 63
 	bne	t3,zero,1f
 #endif
-	vsetvl	t3, t0, t2
+	V_SETVL	t3, t0, t2
 #ifdef CONFIG_VECTOR_EMU
 	j	2f
-1:	vsetvli zero,zero,e64,m2,d1
+1:	V_SETVLI zero,zero,e64,m2,d1
 2:
 #endif
 	csrc	sstatus, t1

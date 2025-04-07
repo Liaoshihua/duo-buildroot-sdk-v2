@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include<stdint.h>
 #include "Eigen/Core"
 #include "unsupported/Eigen/FFT"
 namespace melspec {

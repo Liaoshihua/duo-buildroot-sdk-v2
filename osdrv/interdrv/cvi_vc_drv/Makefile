@@ -90,7 +90,7 @@ ccflags-y += -I$(PWD)/../sys/common/ -I$(PWD)/../sys/common/uapi
 ccflags-y += -I$(srctree)/drivers/tee
 ccflags-y += -I$(srctree)/drivers/staging/android
 ccflags-y += -I$(PWD)/../base/$(CVIARCH_L)
-ccflags-y += -I$(LDDINCDIR) -Wno-date-time -Wno-error=date-time
+ccflags-y += -I$(LDDINCDIR) -Wno-date-time -Wno-error=date-time  -Wno-error=address
 ccflags-y += $(VCODEC_DRIVER_HEADER)
 ccflags-y += -I$(PWD)/../include/
 ccflags-y += -DUSE_KERNEL_MODE -DCVI_H26X_USE_ION_MEM -DCVI_JPG_USE_ION_MEM -DBITSTREAM_ION_CACHED_MEM -DMJPEG_INTERFACE_API -DCVI_H26X_ES_BUFFER_QUEUE_ENABLE -DCVI_H26X_USE_ION_FW_BUFFER -DENV_SET_ADDR_REMAP

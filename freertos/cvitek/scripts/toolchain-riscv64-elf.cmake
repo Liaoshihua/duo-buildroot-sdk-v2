@@ -27,7 +27,7 @@ set(CMAKE_OBJCOPY ${CROSS_COMPILE}objcopy
 # Set the CMAKE C flags (which should also be used by the assembler!
 #set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -DFREERTOS_BSP" )
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -std=gnu11" )
-set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=rv64imafdc" )
+set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=rv64gc" )
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mabi=lp64d" )
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffunction-sections" )
 set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdata-sections" )

@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <pthread.h>
 double get_cur_time_usecs();
 double get_cur_time_millisecs();
 class Timer {

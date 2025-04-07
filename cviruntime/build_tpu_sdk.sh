@@ -131,19 +131,7 @@ cmake --build . --target install -- -v
 test $? -ne 0 && echo "build cvimath failed !!" && popd && exit 1
 popd
 
-if [ ! -e $BUILD_PATH/build_samples ]; then
-  mkdir $BUILD_PATH/build_samples
-fi
-pushd $BUILD_PATH/build_samples
-cmake -G Ninja $BUILD_FLAG \
-    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE_PATH \
-    -DTPU_SDK_PATH=$TPU_SDK_INSTALL_PATH \
-    -DOPENCV_PATH=$TPU_SDK_INSTALL_PATH/opencv \
-    -DCMAKE_INSTALL_PREFIX=$TPU_SDK_INSTALL_PATH/samples \
-    $DIR/samples
-cmake --build . --target install -- -v
-test $? -ne 0 && echo "build samples failed !!" && popd && exit 1
-popd
+
 
 # Copy some files for release build
 mkdir -p $TPU_SDK_INSTALL_PATH/cmake

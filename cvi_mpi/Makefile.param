@@ -44,7 +44,7 @@ else ifeq ($(SDK_VER), musl_riscv64)
   SYSROOT := $(ROOT_DIR)/../host-tools/gcc/riscv64-linux-musl-x86_64/sysroot
   KERNEL_INC := $(KERNEL_DIR)/riscv/usr/include
   OPT_LEVEL := -Os
-  OPT_LEVEL += -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d
+  OPT_LEVEL += -march=rv64gcv_zfh -mcmodel=medany -mabi=lp64d
 endif
 
 ## INCLUDE PATH ##
@@ -128,9 +128,6 @@ LDFLAGS  = -shared -fPIC --gc-sections -export-dynamic -L$(MW_LIB) -L$(MW_3RD_LI
 ELFFLAGS = $(OPT_LEVEL) -Wl,--gc-sections -rdynamic -L$(MW_LIB) -L$(MW_3RD_LIB) $(CVI_TARGET_PACKAGES_LIBDIR)
 
 ifeq ($(SDK_VER), glibc_riscv64)
-CFLAGS += -mno-ldd
-CXXFLAGS += -mno-ldd
-else ifeq ($(SDK_VER), musl_riscv64)
 CFLAGS += -mno-ldd
 CXXFLAGS += -mno-ldd
 endif

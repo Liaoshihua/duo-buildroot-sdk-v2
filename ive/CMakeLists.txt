@@ -66,8 +66,8 @@ include(cmake/mlir.cmake)
 # Check if middleware exists.
 include (cmake/middleware.cmake)
 
-set(CMAKE_C_INIT "-fsigned-char -Werror=all -fdiagnostics-color=always")
-set(CMAKE_CXX_INIT "-fsigned-char -fPIC -Werror=all -fdiagnostics-color=always -std=gnu++11")
+set(CMAKE_C_INIT "-fsigned-char -Werror=all -fdiagnostics-color=always -Wno-stringop-overflow")
+set(CMAKE_CXX_INIT "-fsigned-char -fPIC -Werror=all -fdiagnostics-color=always -std=gnu++11 -Wno-stringop-overflow")
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
     set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_C_INIT} ${CMAKE_C_FLAGS_RELEASE}" )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_INIT} ${CMAKE_CXX_FLAGS_RELEASE}" )

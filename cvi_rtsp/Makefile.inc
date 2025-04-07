@@ -17,7 +17,7 @@ ifeq ($(SDK_VER), glibc_riscv64)
   CFLAGS += -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d
 endif
 ifeq ($(SDK_VER), musl_riscv64)
-  CFLAGS += -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d
+  CFLAGS += -march=rv64gcv_zfh -mcmodel=medany -mabi=lp64d
 endif
 
 CFLAGS += -O3 -Wall  -Werror=all -DNO_OPENSSL=1
