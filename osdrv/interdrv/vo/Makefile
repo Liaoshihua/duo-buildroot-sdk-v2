@@ -9,7 +9,14 @@ $(CVIARCH_L)_vo-objs += common/vo_rgn_ctrl.o
 obj-m += $(CVIARCH_L)_vo.o
 obj-m += $(CVIARCH_L)_mipi_tx.o
 
-ccflags-y +=-Wall -Wextra -Werror -Wno-unused-parameter -Wno-sign-compare -Wno-error=address -Wno-error=stringop-overread
+ccflags-y +=-Wall -Wextra -Werror -Wno-unused-parameter -Wno-sign-compare 
+
+GCC_VERSION := $(shell $(CC) -dumpversion)
+GCC_MAJOR := $(shell echo $(GCC_VERSION) | cut -d. -f1)
+GCC_MINOR := $(shell echo $(GCC_VERSION) | cut -d. -f2)
+ifeq ($(shell expr $(GCC_MAJOR) \>= 14), 1)
+ccflags-y += -Wno-error=address -Wno-error=stringop-overread
+endif
 
 ccflags-y += -I$(PWD)/chip/$(CVIARCH_L)/ -I$(PWD)/common/
 ccflags-y += -I$(PWD)/../include/common/uapi/ -I$(PWD)/../include/chip/$(CVIARCH_L)/uapi/

@@ -46,7 +46,7 @@ else ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-gnu)
   OPT_LEVEL += -mno-ldd -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d
 else ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-musl)
   OPT_LEVEL := -Os
-  OPT_LEVEL += -march=rv64gc -mcmodel=medany -mabi=lp64d -mtune=thead-c906
+  OPT_LEVEL += -march=rv64gc -mcmodel=medany -mabi=lp64d -mtune=thead-c906 
 endif
 KERNEL_INC  := ./
 
@@ -81,7 +81,11 @@ export PROJ_CFLAGS = -DF10
 #
 # export TARGET_PACKAGES_INCLUDE and TARGET_PACKAGES_LIBDIR from build/Makefile
 #
-WARNING_LEVEL :=  -Wall -Wextra -Werror -Wno-error=misleading-indentation -Wno-error=address -Wno-error=calloc-transposed-args -Wno-error=maybe-uninitialized -Wno-error=use-after-free
+WARNING_LEVEL :=  -Wall -Wextra -Werror 
+
+ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-musl)
+WARNING_LEVEL += -Wno-error=misleading-indentation -Wno-error=address -Wno-error=calloc-transposed-args -Wno-error=maybe-uninitialized -Wno-error=use-after-free
+endif
 
 #Generate object files by CC
 CFLAGS    := $(OPT_LEVEL) -std=gnu11 -g $(WARNING_LEVEL) -fPIC -ffunction-sections -fdata-sections
@@ -95,7 +99,11 @@ DEPFLAGS  := -MMD
 #Generate archive file by AR
 ARFLAGS   := rcs
 #Generate shared library by LD
-LDFLAGS   := -shared -export-dynamic -latomic -L$(MW_LIB) -L$(MW_3RD_LIB)
+LDFLAGS   := -shared -export-dynamic -L$(MW_LIB) -L$(MW_3RD_LIB)
+
+ifeq ($(TARGET_MACHINE), riscv64-unknown-linux-musl)
+LDFLAGS += -latomic
+endif
 
 ### COMMON ELF FLAGS ###
 #Generate ELF files by CC and CXX

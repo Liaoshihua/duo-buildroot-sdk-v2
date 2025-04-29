@@ -24,7 +24,14 @@ endif
 # for isp porting test
 # ccflags-y += -DPORTING_TEST
 
-ccflags-y +=-Wall -Wextra -Werror -Wno-unused-parameter -Wno-sign-compare -Wno-stringop-overread
+ccflags-y +=-Wall -Wextra -Werror -Wno-unused-parameter -Wno-sign-compare 
+
+GCC_VERSION := $(shell $(CC) -dumpversion)
+GCC_MAJOR := $(shell echo $(GCC_VERSION) | cut -d. -f1)
+GCC_MINOR := $(shell echo $(GCC_VERSION) | cut -d. -f2)
+ifeq ($(shell expr $(GCC_MAJOR) \>= 14), 1)
+ccflags-y += -Wno-error=address -Wno-error=stringop-overread
+endif
 
 KBUILD_EXTRA_SYMBOLS = $(PWD)/../base/Module.symvers
 KBUILD_EXTRA_SYMBOLS += $(PWD)/../sys/Module.symvers
